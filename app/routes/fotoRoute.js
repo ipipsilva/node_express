@@ -1,5 +1,5 @@
 var express = require('express');
-var Foto = require('../models/Foto.js');
+var Foto = require('../models/Foto');
 var connection = require('../config/database.js');
 
 var fotoRoute = function(router) {
