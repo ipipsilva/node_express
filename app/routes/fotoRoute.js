@@ -5,7 +5,7 @@ var connection = require('../config/database.js');
 var fotoRoute = function(router) {
 
     router.route('/').get( function(req, res){
-        Foto.find({})
+        Foto.find({}).sort([['nome', 'ascending']])
         .exec(function(err, fotos) {
             if(err) {
                 console.log('Erro ao acessar as fotos! Erro: ' + err);
@@ -21,8 +21,6 @@ var fotoRoute = function(router) {
         var nome = req.body.nome;
         var descricao = req.body.descricao;
         var url = req.body.url;
-
-        console.log('ID: ' + id);
 
         if(id) {
             var fotoUpdate = {"nome": nome, "descricao": descricao, "url": url};
@@ -42,11 +40,16 @@ var fotoRoute = function(router) {
     router.route('/detalhe/:id').get(function(req, res) {
         var query =  {'_id' : req.params.id};
         Foto.findOne(query, function(err, foto) {
-            if (err)
-              console.log(err);
-            else {
-              res.render('pages/detalhe', {'foto':foto});
-            }
+            if (err) console.log('Erro ao recuperar os dados da foto! Erro: ' + err);
+            res.render('pages/detalhe', {'foto':foto});
+        });
+    });
+
+    router.route('/delete/:id').get(function(req, res) {
+        var query = {"_id":req.params.id};
+        Foto.remove(query, function(err){
+            if(err) console.log('Erro ao deletar a foto! Erro: ' + err);
+            res.redirect('/');
         });
     });
 };

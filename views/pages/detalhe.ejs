@@ -28,12 +28,16 @@
                <input type="text" class="form-control" id="url" name="url" value="<%= foto.url %>">
              </div>
              <button type="submit" class="btn btn-success">Alterar</button>
-             <a href="/delete" class="btn btn-danger" role="button">Deletar</a>
+             <a href="/delete/<%= foto._id %>" class="btn btn-danger" role="button">Deletar</a>
              <a href="/" class="btn btn-default" role="button">Voltar</a>
            </form>
        </div>
        <div class="col-md-6">
-            <img src="<%= foto.url %>" alt="Teste" class="img-thumbnail" style="width: 605px; height: 268px;">
+            <% if (foto.url) { %>
+                <img src="<%= foto.url %>" alt="" class="img-thumbnail" style="width: 605px; height: 268px;">
+            <% } else { %>
+                <img src="http://nptel.ac.in/LocalChapter/Assets/college_logo/dummy_logo.png" alt="" class="img-thumbnail" style="width: 605px; height: 268px;">
+            <% } %>
        </div>
      </div>
 
