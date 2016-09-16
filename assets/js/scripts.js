@@ -5,10 +5,15 @@ function chamarAPI() {
         dataType: 'json',
         contextType: 'application/json',
         beforeSend: function (){
-            $.blockUI({ message: '<h1>Just a moment...</h1>' });
+            $.blockUI({ message: '<h4>Just a moment...</h4>' });
         },
         success: function(data) {
-            $("#txtSaida").val(JSON.stringify(data));
+
+            for (var i=0; i < data.length; i++) {
+                var option = new Option(data[i].nome, data[i].codEscola);
+                $('#escolas').append(option);
+            }
+
             $.unblockUI();
         }
     });
