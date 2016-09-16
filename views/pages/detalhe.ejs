@@ -11,32 +11,29 @@
 
     <main>
 
-        <h1><%= foto.nome %></h1>
-
       <div class="row">
-       <div class="col-6">
+       <div class="col-md-6">
            <form method="post" action="/update">
              <div class="form-group">
-               <label for="nome">Nome:</label>
-               <input type="text" class="form-control" id="nome" name="nome">
+               <label for="nome">Nome</label>
+               <input type="text" class="form-control" id="nome" name="nome" value="<%= foto.nome %>">
              </div>
              <div class="form-group">
-               <label for="descricao">Descricao:</label>
-               <input type="text" class="form-control" id="descricao" name="descricao">
+               <label for="descricao">Descricao</label>
+               <input type="text" class="form-control" id="descricao" name="descricao" value="<%= foto.descricao %>">
              </div>
              <div class="form-group">
-               <label for="url">Url:</label>
-               <input type="text" class="form-control" id="url" name="url">
+               <label for="url">Url</label>
+               <input type="text" class="form-control" id="url" name="url" value="<%= foto.url %>">
              </div>
-             <button type="submit" class="btn btn-default">Cadastrar</button>
+             <button type="submit" class="btn btn-default">Alterar</button>
+                          
            </form>
        </div>
-       <div class="col-6">
-            parte da foto
+       <div class="col-md-6">
+            <img src="<%= foto.url %>" alt="Teste" class="img-thumbnail" style="width: 605px; height: 268px;">
        </div>
      </div>
-
-
 
     </main>
 

@@ -30,12 +30,12 @@ var fotoRoute = function(router) {
 
     router.route('/detalhe/:id').get(function(req, res) {
         var query =  {'_id' : req.params.id};
-        Foto.find(query, function(err, foto) {
+        Foto.findOne(query, function(err, foto) {
             if (err)
               console.log(err);
             else {
               console.log('Foto recebida: ' + foto);
-              res.render('pages/detalhe', {foto: foto});
+              res.render('pages/detalhe', {'foto':foto});
             }
         });
     });
