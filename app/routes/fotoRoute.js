@@ -10,22 +10,33 @@ var fotoRoute = function(router) {
             if(err) {
                 console.log('Erro ao acessar as fotos! Erro: ' + err);
             } else {
-                res.render('pages/index', {'fotos': fotos });
+                res.render('pages/index', {'fotos': fotos});
             }
         });
     });
 
     router.route('/').post( function(req, res) {
 
+        var id = req.body.id;
         var nome = req.body.nome;
         var descricao = req.body.descricao;
         var url = req.body.url;
 
-        var foto = new Foto({"nome": nome, "descricao": descricao, "url": url});
-        foto.save(function(err){
-            if(err) res.send('Erro ao salvar foto! Erro: ' + err);
-            res.redirect('/');
-        });
+        console.log('ID: ' + id);
+
+        if(id) {
+            var fotoUpdate = {"nome": nome, "descricao": descricao, "url": url};
+            Foto.update(id, fotoUpdate, function(err){
+                if(err) console.log('Erro ao atualizar a foto! Erro: ' + err);
+                res.redirect('/');
+            });
+        } else {
+            var foto = new Foto({"nome": nome, "descricao": descricao, "url": url});
+            foto.save(function(err){
+                if(err) res.send('Erro ao salvar foto! Erro: ' + err);
+                res.redirect('/');
+            });
+        }
     });
 
     router.route('/detalhe/:id').get(function(req, res) {
@@ -34,7 +45,6 @@ var fotoRoute = function(router) {
             if (err)
               console.log(err);
             else {
-              console.log('Foto recebida: ' + foto);
               res.render('pages/detalhe', {'foto':foto});
             }
         });
