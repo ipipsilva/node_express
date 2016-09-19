@@ -3,6 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var connection = require('./app/config/database.js');
 var fotoRoute = require('./app/routes/fotoRoute.js');
+var escolaRoute = require('./app/routes/escolaRoute.js');
 
 app.use('/pages', express.static('pages'));
 app.use('/assets', express.static('assets'));
@@ -27,6 +28,7 @@ app.get('/cadastro', function(req, res) {
 });
 
 fotoRoute(app);
+escolaRoute(app);
 
 var port = process.env.PORT || 3000;
 
